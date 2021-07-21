@@ -1,0 +1,29 @@
+<div class="csv-file-chooser-section">
+  <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" (change)="fileChangeListener($event)"
+         accept=".csv" />
+</div>
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Columns</mat-label>
+  <mat-select #selected [formControl]="columns" multiple>
+    <mat-option  *ngFor="let column of columnsAll" [value]="column">{{column}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button mat-button (click)="checkedColumn(selected.value)">Shown</button>
+
+
+<div *ngIf="shown">
+  <mat-list>
+    <mat-list-item *ngFor="let date of massNumeric">
+      <app-line-chart [date]="date"></app-line-chart>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-list>
+    <mat-list-item *ngFor="let date of massString">
+      <app-bar-chart [date]="date"></app-bar-chart>
+    </mat-list-item>
+  </mat-list>
+</div>
