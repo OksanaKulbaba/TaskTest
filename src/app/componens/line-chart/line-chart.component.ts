@@ -34,7 +34,7 @@ export class LineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    console.log('line', this.date)
   }
 
 

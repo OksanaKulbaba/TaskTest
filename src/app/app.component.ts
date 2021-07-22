@@ -11,8 +11,8 @@ export class AppComponent {
   csvRecords: any[] = [];
   header = true;
   columnsAll: string[];
-  massNumeric: string[];
-  massString: string[];
+  massNumeric: string[] = [];
+  massString: string[] = [];
   constructor(private ngxCsvParser: NgxCsvParser) {
   }
 
@@ -35,21 +35,21 @@ export class AppComponent {
   }
 
   checkedColumn(selected): void{
-    const generalColumns = selected.map( nameColumn => {
-    return [nameColumn, this.csvRecords.map(row => {
-      if(parseInt(row[nameColumn])) {
-        return [parseInt(row[nameColumn]), true];
-      }
-      else {
-        return [row[nameColumn], false];
-      }
-    })];
+
+      const generalColumns = selected.map( nameColumn => {
+        return [nameColumn, this.csvRecords.map(row => row[nameColumn])];
+   /*   this.massNumeric = generalColumns.filter(column => column[1][1] = true );
+      this.massString = generalColumns.filter(column => column[1][1] = false );*/
     });
 
-    this.massNumeric = generalColumns.filter(column => column[1][1] = true );
-    this.massString = generalColumns.filter(column => column[1][1] = false );
-
-    this.shown = true;
-
+      generalColumns.map(arr => {
+        if (parseInt(arr[1][0]))
+        {
+          this.massNumeric.push(arr); }
+        else {  this.massString.push(arr); }
+      });
+      console.log('cheked Number', this.massNumeric);
+      console.log('cheked String', this.massString);
+      this.shown = true;
   }
 }
