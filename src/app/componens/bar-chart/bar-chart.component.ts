@@ -11,25 +11,40 @@ export class BarChartComponent implements OnInit {
 
 
 
-  @Input() date: [];
+  @Input() date: any;
 
 
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
-  barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
-  ];
+  barChartData: ChartDataSets[] = [];
   constructor() { }
 
   ngOnInit(): void {
-    console.log('bar', this.date);
+    this.barChartLabels = this.getUniqueLabel();
+    this.barChartData.push({
+      data: this.getDate(this.barChartLabels),
+      label: this.date[0]
+    });
   }
-
+  getUniqueLabel(): string[]{
+   return  this.date[1].filter((v, i, a) => a.indexOf(v) === i);
+  }
+  getDate(label): number[]{
+    const numberDate: number[] = [];
+    for (const l of label ){
+      let count = 0;
+      this.date[1].map(d => {
+        if (d === l) { count++; }
+      });
+      numberDate.push(count);
+    }
+    return numberDate;
+  }
 
 }

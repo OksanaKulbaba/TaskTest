@@ -9,10 +9,10 @@ import {Color, Label} from 'ng2-charts';
 })
 export class LineChartComponent implements OnInit {
 
-  @Input() date!: [];
+  @Input() date!: any;
 
   lineChartData: ChartDataSets[] = [
-    { data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
+    //{ data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
   ];
 
   lineChartLabels: Label[];
@@ -34,7 +34,13 @@ export class LineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('line', this.date)
+
+    this.lineChartData.push({
+      data: this.date[1].map(d => parseInt(d)),
+      label: this.date[0]
+    });
+    console.log('line', this.date);
+    console.log('date', this.lineChartData);
   }
 
 

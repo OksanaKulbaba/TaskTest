@@ -35,21 +35,17 @@ export class AppComponent {
   }
 
   checkedColumn(selected): void{
-
+    this.massString = [];
+    this.massNumeric  = [];
       const generalColumns = selected.map( nameColumn => {
         return [nameColumn, this.csvRecords.map(row => row[nameColumn])];
-   /*   this.massNumeric = generalColumns.filter(column => column[1][1] = true );
-      this.massString = generalColumns.filter(column => column[1][1] = false );*/
     });
-
       generalColumns.map(arr => {
-        if (parseInt(arr[1][0]))
-        {
-          this.massNumeric.push(arr); }
+        if (parseInt(arr[1][0])) {
+          this.massNumeric.push(arr);
+        }
         else {  this.massString.push(arr); }
       });
-      console.log('cheked Number', this.massNumeric);
-      console.log('cheked String', this.massString);
       this.shown = true;
   }
 }
