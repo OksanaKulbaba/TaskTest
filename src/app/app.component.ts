@@ -11,6 +11,7 @@ export class AppComponent {
   csvRecords: any[] = [];
   header = true;
   columnsAll: string[];
+
   massNumeric: string[] = [];
   massString: string[] = [];
   constructor(private ngxCsvParser: NgxCsvParser) {
